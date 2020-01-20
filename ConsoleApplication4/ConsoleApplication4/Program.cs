@@ -18,15 +18,28 @@ namespace ConsoleApplication4
             var startingDeck = Suits().SelectMany(suit => 
                 Ranks().Select(rank => 
                     new { Suit = suit, Rank = rank }));
-            
 
-            foreach (var card in startingDeck)
+
+            //Take method return a specified number of contiguous elements from the start of a sequence
+            var top = startingDeck.Take(26);
+            
+            //Skip method bypasses a specified number of elements in a sequence and then returns the remaining elements.
+            var bottom = startingDeck.Skip(26);
+            
+            //using the extension method
+            var shuffle = top.InterleaveSequenceWith(bottom);
+            
+            foreach (var card in shuffle)
             {
                 Console.WriteLine(card);
             }
-            
+
+
+        }
         
-    }
+        
+        
+        
 
         static IEnumerable<string> Suits()
         {
